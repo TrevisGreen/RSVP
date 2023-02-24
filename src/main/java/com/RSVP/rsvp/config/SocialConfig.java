@@ -1,4 +1,52 @@
 package com.RSVP.rsvp.config;
 
-public class SocialConfig {
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.core.env.Environment;
+import org.springframework.security.crypto.encrypt.Encryptors;
+
+import javax.sql.DataSource;
+
+@Configuration
+@EnableSocial
+@Import(PropertyPlaceholderConfig.class)
+public class SocialConfig implements SocialConfigurer {
+
+    @Autowired
+    private DataSource dataSource;
+
+    @Value("${twitter.consumer.key}")
+    private String twitterKey;
+
+    @Value("${twitter.consumer.secret}")
+    private String twitterSecret;
+
+    @Value("${facebook.app.id}")
+    private String facebookKey;
+
+    @Value("${facebook.app.secret}")
+    private String facebookSecret;
+
+    @Override
+    public void addConnectionFactories(ConnectionFactorConfigurer cfc, Environment env) {
+        cfc.addConnectionFactory(new TwitterConnectionFactory(twitterKey, twitterSecret));
+        cfc.addConnectionFactory(new FacebookConnectionFactory(facebookKey, facebookSecret));
+    }
+
+    @Bean
+    @Override
+    public UserIdSource getUserIdSource() {
+        return new AuthenticationNameUserIdSource();
+    }
+
+    @Bean
+    @Override
+    public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator cfl) {
+        return new JdbcUsersConnectionRepository(dataSource, cfl, Encryptors.noOpText());
+    }
+
 }
