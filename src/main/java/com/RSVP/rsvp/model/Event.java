@@ -70,7 +70,7 @@ public class Event implements Serializable {
     @Column(length = 64)
     private String imageName;
     private Long imageSize;
-    private byte[] imageDate;
+    private byte[] imageData;
     @Transient
     private MultipartFile imageFile;
     @Column(length = 32)
@@ -259,12 +259,12 @@ public class Event implements Serializable {
         this.imageSize = imageSize;
     }
 
-    public byte[] getImageDate() {
-        return imageDate;
+    public byte[] getImagaData() {
+        return imageData;
     }
 
-    public void setImageDate(byte[] imageDate) {
-        this.imageDate = imageDate;
+    public void setImagaData(byte[] imageData) {
+        this.imageData = imageData;
     }
 
     public MultipartFile getImageFile() {
