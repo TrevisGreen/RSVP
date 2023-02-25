@@ -25,9 +25,7 @@ public class Event implements Serializable {
     @NotBlank
     @Column(nullable = false, unique = true)
     private String code;
-    @NotBlank
-    @Column(nullable = false, unique = true)
-    private String code;
+
     @NotBlank
     @Column(nullable = false)
     private String name;
