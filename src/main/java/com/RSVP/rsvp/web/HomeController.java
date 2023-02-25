@@ -56,12 +56,12 @@ public class HomeController extends BaseController {
 
     @RequestMapping(value = "/image/{eventId}", method = RequestMethod.GET)
     public String image(HttpServletRequest request, HttpServletResponse response, @PathVariable String eventId) {
-        Event event eventService.get(eventId);
+        Event event = eventService.get(eventId);
         if(event != null) {
             response.setContentType(event.getContentType());
             response.setContentLength(event.getImageSize().intValue());
             try {
-                response.getOutputStream().write(event.getImageData);
+                response.getOutputStream().write(event.getImagaData());
             } catch(IOException e) {
                 log.error("Could not write image to outputstream");
                 throw new RuntimeException("Could not get image", e);
