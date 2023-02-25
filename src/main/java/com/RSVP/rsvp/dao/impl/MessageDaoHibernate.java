@@ -3,6 +3,10 @@ package com.RSVP.rsvp.dao.impl;
 
 import com.RSVP.rsvp.dao.BaseDao;
 import com.RSVP.rsvp.dao.MessageDao;
+import com.RSVP.rsvp.model.Message;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.*;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
