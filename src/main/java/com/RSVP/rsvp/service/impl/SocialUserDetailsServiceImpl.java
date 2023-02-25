@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.social.security.SocialUserDetails;
+import org.springframework.social.security.SocialUserDetailsService;
 
-public class SocialUserDetailsServiceImpl extends BaseService implements SocialUserDetailsServiceImpl {
+public class SocialUserDetailsServiceImpl extends BaseService implements SocialUserDetailsService {
 
     private final UserDetailsService userDetailsService;
 
@@ -27,6 +29,6 @@ public class SocialUserDetailsServiceImpl extends BaseService implements SocialU
         User user = userDao.get(userId);
         log.debug("Found user details: {}",user);
 
-        return (SocialUserDetails) user
+        return (SocialUserDetails) user;
     }
 }
