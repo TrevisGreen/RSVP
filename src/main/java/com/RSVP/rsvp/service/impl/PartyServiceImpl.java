@@ -1,12 +1,15 @@
 package com.RSVP.rsvp.service.impl;
 
 
+import com.RSVP.rsvp.dao.EventDao;
+import com.RSVP.rsvp.dao.PartyDao;
 import com.RSVP.rsvp.model.Event;
 import com.RSVP.rsvp.model.Party;
 import com.RSVP.rsvp.model.Role;
 import com.RSVP.rsvp.model.User;
 import com.RSVP.rsvp.service.BaseService;
 import com.RSVP.rsvp.service.PartyService;
+import com.RSVP.rsvp.utils.NotEnoughSeatsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +22,9 @@ import java.util.List;
 public class PartyServiceImpl  extends BaseService implements PartyService {
 
     @Autowired
-    private PartDao partyDao;
-    @Autowired EventDao eventDao;
+    private PartyDao partyDao;
+    @Autowired
+    EventDao eventDao;
 
     @Override
     public Party create(Party party) throws NotEnoughSeatsException {

@@ -1,6 +1,7 @@
 package com.RSVP.rsvp.service.impl;
 
 
+import com.RSVP.rsvp.dao.UserDao;
 import com.RSVP.rsvp.model.Connection;
 import com.RSVP.rsvp.model.Role;
 import com.RSVP.rsvp.model.User;
