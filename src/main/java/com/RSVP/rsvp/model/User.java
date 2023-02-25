@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.social.security.SocialUserDetails;
 
 import java.io.Serializable;
 import java.util.*;
@@ -179,9 +180,10 @@ public class User implements Serializable, UserDetails, SocialUserDetails {
         this.roles = roles;
     }
     @Override
-    public Collections<? extends GrantedAuthority> getAuthorities() {
+    public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new LinkedHashSet<>();
         authorities.addAll(roles);
+        return authorities;
     }
     @Override
     public boolean isAccountNonExpired() {
