@@ -5,12 +5,16 @@ import com.RSVP.rsvp.dao.BaseDao;
 import com.RSVP.rsvp.dao.PartyDao;
 import com.RSVP.rsvp.model.Event;
 import com.RSVP.rsvp.model.Party;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Respository
+@Repository
 @Transactional
 public class PartyDaoHibernate extends BaseDao implements PartyDao {
 
@@ -19,7 +23,7 @@ public class PartyDaoHibernate extends BaseDao implements PartyDao {
         Criteria criteria = currentSession().createCriteria(Party.class);
 
         criteria.createCriteria("event").add(Restrictions.idEq(party.getEvent().getId()));
-        criteria.setProjection(Projection.sum("seats"));
+        criteria.setProjection(Projections.sum("seats"));
 
         Long results = (Long) criteria.uniqueResult();
         log.debug("Result {}", results);
@@ -38,7 +42,7 @@ public class PartyDaoHibernate extends BaseDao implements PartyDao {
     @Override
     public List<Party> findAllByEvent(Event event) {
         Query query = currentSession().createQuery("select p from Party p inner join p.event e where e.id = :eventId");
-        query.setString("eventId",event.getId());
+        query.setString("eventId", event.getId());
         return query.list();
     }
 }
