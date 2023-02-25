@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.io.IOException;
 
 @Controller
@@ -46,7 +47,7 @@ public class HomeController extends BaseController {
         return "home/home";
     }
 
-    @RequestMapping(value = "/currentBackground", params = {"backgroundId"}, method = RequestMethod.POST);
+
     @ResponseBody
     public String setBackground(HttpSession session, @RequestParam Integer backgroundId) {
         session.setAttribute(Constants.BACKGROUND_ID, backgroundId);

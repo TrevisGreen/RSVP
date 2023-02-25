@@ -1,6 +1,7 @@
 package com.RSVP.rsvp.model;
 
 
+import com.RSVP.rsvp.utils.Constants;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -57,10 +58,10 @@ public class Event implements Serializable {
     @Email
     @Column(nullable = false)
     private String hostEmail;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Temporal(jakarta.persistence.TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date dateCreated;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Temporal(jakarta.persistence.TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date lastUpdated;
     @ManyToOne(optional = false)
