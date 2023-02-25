@@ -1,6 +1,8 @@
 package com.RSVP.rsvp.model;
 
 
+import com.RSVP.rsvp.validation.PasswordsNotEmpty;
+import com.RSVP.rsvp.validation.PasswordsNotEqual;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -21,7 +23,7 @@ import java.util.*;
         passwordFieldName = "password",
         passwordVerificationFieldName = "passwordVerification"
 )
-@PasswordNotEqual(
+@PasswordsNotEqual(
         passwordFieldName = "password",
         passwordVerificationFieldName = "passwordVerification"
 )
