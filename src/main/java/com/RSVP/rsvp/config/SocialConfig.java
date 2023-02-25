@@ -8,6 +8,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.encrypt.Encryptors;
+import org.springframework.social.UserIdSource;
+import org.springframework.social.config.annotation.ConnectionFactoryConfigurer;
+import org.springframework.social.config.annotation.EnableSocial;
+import org.springframework.social.config.annotation.SocialConfigurer;
+import org.springframework.social.connect.ConnectionFactoryLocator;
+import org.springframework.social.connect.UsersConnectionRepository;
+import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
+import org.springframework.social.facebook.connect.FacebookConnectionFactory;
+import org.springframework.social.security.AuthenticationNameUserIdSource;
+import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 
 import javax.sql.DataSource;
 
@@ -32,7 +42,7 @@ public class SocialConfig implements SocialConfigurer {
     private String facebookSecret;
 
     @Override
-    public void addConnectionFactories(ConnectionFactorConfigurer cfc, Environment env) {
+    public void addConnectionFactories(ConnectionFactoryConfigurer cfc, Environment env) {
         cfc.addConnectionFactory(new TwitterConnectionFactory(twitterKey, twitterSecret));
         cfc.addConnectionFactory(new FacebookConnectionFactory(facebookKey, facebookSecret));
     }
