@@ -1,6 +1,7 @@
 package com.RSVP.rsvp.service.impl;
 
 
+import com.RSVP.rsvp.dao.EventDao;
 import com.RSVP.rsvp.dao.UserDao;
 import com.RSVP.rsvp.model.Event;
 import com.RSVP.rsvp.model.Role;
@@ -40,7 +41,7 @@ public class EventServiceImpl extends BaseService implements EventService {
             event.setImageName(event.getImageFile().getOriginalFilename());
             event.setContentType(event.getImageFile().getContentType());
             event.setImageSize(event.getImageFile().getSize());
-            event.setImageDate(event.getImageFile().getBytes());
+            event.setImagaData(event.getImageFile().getBytes());
         }
         if(StringUtils.isBlank(event.getId())) {
             event.setDateCreated(date);
