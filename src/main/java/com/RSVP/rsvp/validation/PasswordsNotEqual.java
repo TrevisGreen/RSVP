@@ -16,7 +16,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Constraint(validatedBy = PasswordsNotEqualValidator.class)
 @Documented
-public interface PasswordsNotEqual {
+public @interface PasswordsNotEqual {
 
     String message() default "PasswordsNotEqual";
 
