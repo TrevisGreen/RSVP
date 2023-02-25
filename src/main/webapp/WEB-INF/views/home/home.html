@@ -1,11 +1,46 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-  <head th:include="">
+  <head th:include="/layouts/main :: head(Home)">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="#{login.title}">Login</title>
+
+    <link rel="stylesheet" href="../../../resources/css/jquery-ui.min.css" th:href="@{/resources/css/jquery-ui.min.css}" />
+    <link rel="stylesheet" href="../../../resources/css/bootstrap.min.css" th:href="@{/resources/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="../../../resources/css/bootstrap-theme.min.css" th:href="@{/resources/css/bootstrap-theme.min.css}" />
+    <link rel="stylesheet" href="../../../resources/css/font-awesome.min.css" th:href="@{/resources/css/font-awesome.min.css}" />
+    <link rel="stylesheet" href="../../../resources/css/main.css" th:href="@{/resources/css/main.css}" />
+
   </head>
   <body>
+    <header class="navbar navbar-inverse navbar-fixed-top" role="banner" th:replace="/layouts/main :: navigation('home')">
+    </header>
 
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-offset-4 col-sm-4">
+          <form action="#" th:action="@{/code}" method="post" autocomplete="off" name="codeForm">
+            <img src="../../../resources/img/logo.png" th:src="@{/resources/img/logo.png}" alt="RSVP.com" class="img-responsive" style="padding-top:70px;" />
+            <div class="input-group" style="...">
+              <input type="text" class="form-control" name="code" id="code" placeholder="Type your RSVP Code" style="..." autofocus="autofocus" value="" th:value="${code}"/>
+              <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit">RSVP</button>
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <footer role="contentinfo" th:replace="/layouts/main :: footer">
+    </footer>
+
+    <div th:replace="/layouts/main :: scripts" th:remove="tag">
+      <script src="../../../resources/js/jquery-1.10.2.min.js" th:src="@{/resources/js/jquery-1.10.2.min.js}"></script>
+      <script src="../../../resources/js/jquery-migrate-1.2.1.min.js" th:src="@{/resources/js/jquery-migrate-1.2.1.min.js}"></script>
+      <script src="../../../resources/js/jquery-ui.min.js" th:src="@{/resources/js/jquery-ui.min.js}"></script>
+      <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+      <script src="../../../resources/js/main.js" th:src="@{/resources/js/main.js}"></script>
+    </div>
   </body>
 </html>
