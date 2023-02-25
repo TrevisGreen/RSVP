@@ -30,7 +30,7 @@ public class Event implements Serializable {
     @Column(nullable = false)
     private String name;
     private String description;
-    @Temporal(javax.persistence.TemporalType.TIMESSTAMP)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date_", nullable = false)
     @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm zzz")
     private Date date = new Date();
