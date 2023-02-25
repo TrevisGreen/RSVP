@@ -16,7 +16,7 @@ import static java.lang.annotation.ElementType.TYPE;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = PasswordsNotEmptyValidator.class)
 @Documented
-public interface PasswordsNotEmpty {
+public @interface PasswordsNotEmpty {
 
     String message() default "PasswordsNotEmpty";
 
