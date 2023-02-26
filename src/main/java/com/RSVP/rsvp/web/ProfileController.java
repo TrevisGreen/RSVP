@@ -10,6 +10,7 @@ import com.RSVP.rsvp.service.UserService;
 import com.RSVP.rsvp.utils.Constants;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -78,7 +79,7 @@ public class ProfileController extends BaseController {
 
         this.paginate(params, model, page);
 
-        model.addAllAtrributes(params);
+        model.addAllAttributes(params);
 
         return "home/profile";
     }
