@@ -20,6 +20,8 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
+
+import javax.servlet.ServletContext;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -39,9 +41,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public ServletContextTemplateResolver templateResolver() {
-        ServletContextTemplateResolver resolver = new ServletContextTemplateResolver();
-        resolver.setPrefix("/WEB-INF/views");
+    public ServletContextTemplateResolver templateResolver(ServletContext servletContext) {
+        ServletContextTemplateResolver resolver = new ServletContextTemplateResolver(servletContext);
+        resolver.setPrefix("/WEB-INF/views/");
         resolver.setSuffix(".html");
         resolver.setTemplateMode("HTML5");
         resolver.setOrder(1);
@@ -50,19 +52,19 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public SpringTemplateEngine templateEngine() {
+    public SpringTemplateEngine templateEngine(final ServletContextTemplateResolver templateResolver) {
         Set<IDialect> dialects = new HashSet<>();
         dialects.add(new SpringSecurityDialect());
         SpringTemplateEngine engine = new SpringTemplateEngine();
-        engine.setTemplateResolver(templateResolver());
+        engine.setTemplateResolver(templateResolver);
         engine.setAdditionalDialects(dialects);
         return engine;
     }
 
     @Bean
-    public ThymeleafViewResolver thymeleafViewResolver() {
+    public ThymeleafViewResolver thymeleafViewResolver(final SpringTemplateEngine templateEngine) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
-        resolver.setTemplateEngine(templateEngine());
+        resolver.setTemplateEngine(templateEngine);
         return resolver;
     }
 
