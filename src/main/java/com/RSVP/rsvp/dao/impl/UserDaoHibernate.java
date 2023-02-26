@@ -27,7 +27,7 @@ public class UserDaoHibernate extends BaseDao implements UserDao {
     @Transactional(readOnly = true)
     public User get(String username) {
         Query query = currentSession().getNamedQuery("findUserByUsername");
-        query.setString("username", username);
+        query.toString();
         return (User) query.uniqueResult();
     }
 
@@ -35,7 +35,7 @@ public class UserDaoHibernate extends BaseDao implements UserDao {
     @Transactional(readOnly = true)
     public User getByOpenId(String openId) {
         Query query = currentSession().getNamedQuery("findUserByOpenId");
-        query.setString("openId", openId);
+        query.toString();
         return (User) query.uniqueResult();
     }
 
@@ -78,8 +78,8 @@ public class UserDaoHibernate extends BaseDao implements UserDao {
     @Override
     public Map<String, Object> list(Map<String, Object> params) {
         log.debug("User list");
-        Criteria criteria = currentSession().createCriteria(User.class);
-        Criteria countCriteria = currentSession().createCriteria(User.class);
+        Criteria criteria = (Criteria) currentSession().createQuery(String.valueOf(User.class));
+        Criteria countCriteria = (Criteria) currentSession().createQuery(String.valueOf(User.class));
         if(params.containsKey("filter")) {
             String filter = (String) params.get("filter");
             Disjunction properties = Restrictions.disjunction();
