@@ -9,7 +9,7 @@ public interface PartyDao {
 
     public Integer getAllotedSeats(Party party);
 
-    public Party created(Party party);
+    public Party create(Party party);
 
-    public List<Party> findallByEvent(Event event);
+    public List<Party> findAllByEvent(Event event);
 }

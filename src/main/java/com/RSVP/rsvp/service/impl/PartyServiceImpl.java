@@ -29,11 +29,11 @@ public class PartyServiceImpl  extends BaseService implements PartyService {
     @Override
     public Party create(Party party) throws NotEnoughSeatsException {
         Event event = eventDao.get(party.getEvent().getId());
-        if(event.getSeats() > 0) {
+        if (event.getSeats() > 0) {
             Integer allotedSeats = partyDao.getAllotedSeats(party);
             log.debug("AllotedSeats: {} | {} | {}", new Object[] {allotedSeats, party.getSeats(), event.getSeats()});
-            if((allotedSeats + party.getSeats()) > event.getSeats()) {
-                throw new NotEnoughSeatsException("There's only " + (event.getSeats() - allotedSeats) + "place(s) available.");
+            if ((allotedSeats + party.getSeats()) > event.getSeats()) {
+                throw new NotEnoughSeatsException("There's only " + (event.getSeats() - allotedSeats) + " place(s) available.");
             }
         }
         party.setDateCreated(new Date());
