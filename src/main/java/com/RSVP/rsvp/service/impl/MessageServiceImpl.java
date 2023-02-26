@@ -21,8 +21,12 @@ public class MessageServiceImpl extends BaseService implements MessageService {
     @Transactional
     @Override
     public Map<String, Object> list(Map<String, Object> params) {
-        return messageDao.get(messageId);
+        return messageDao.list(params);
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Message get(Long messageId) { return messageDao.get(messageId); }
 
     @Override
     public Message update(Message message) {
