@@ -70,7 +70,7 @@ public class UserDaoHibernate extends BaseDao implements UserDao {
     @Override
     public Connection getConnection(String username) {
         Query query = currentSession().createQuery("select c from Connection c where c.id.userid = :username");
-        query.setString("username", username);
+        query.toString();
         return (Connection) query.uniqueResult();
     }
 
@@ -118,7 +118,7 @@ public class UserDaoHibernate extends BaseDao implements UserDao {
     @Override
     public void delete(User user) {
         Query query = currentSession().createQuery("delete from Event e where e.user.id = :userId");
-        query.setLong("userId", user.getId());
+        query.setHint("userId", user.getId());
         query.executeUpdate();
         currentSession().delete(user);
     }
