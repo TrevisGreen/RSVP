@@ -2,6 +2,7 @@ package com.RSVP.rsvp.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import org.apache.commons.lang3.StringUtils;
 
 public class PasswordsNotEmptyValidator implements ConstraintValidator<PasswordsNotEmpty, Object> {
 
