@@ -5,6 +5,9 @@ import com.RSVP.rsvp.dao.UserDao;
 import com.RSVP.rsvp.model.Connection;
 import com.RSVP.rsvp.model.Role;
 import com.RSVP.rsvp.model.User;
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.*;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,6 +28,14 @@ public class UserDaoHibernate extends BaseDao implements UserDao {
     public User get(String username) {
         Query query = currentSession().getNamedQuery("findUserByUsername");
         query.setString("username", username);
+        return (User) query.uniqueResult();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public User getByOpenId(String openId) {
+        Query query = currentSession().getNamedQuery("findUserByOpenId");
+        query.setString("openId", openId);
         return (User) query.uniqueResult();
     }
 
@@ -72,9 +83,9 @@ public class UserDaoHibernate extends BaseDao implements UserDao {
         if(params.containsKey("filter")) {
             String filter = (String) params.get("filter");
             Disjunction properties = Restrictions.disjunction();
-            properties.add(REstrictions.ilike("username", filter,MatchMode.ANYWHERE));
-            properties.add(Restrictions.ilike("firstName", filter.MatchMode.ANYWHERE));
-            properties.add(Restrictions.ilike("lastName", filter.MatchMode.ANYWHERE));
+            properties.add(Restrictions.ilike("username", filter, MatchMode.ANYWHERE));
+            properties.add(Restrictions.ilike("firstName", filter, MatchMode.ANYWHERE));
+            properties.add(Restrictions.ilike("lastName", filter, MatchMode.ANYWHERE));
             criteria.add(properties);
             countCriteria.add(properties);
         }
