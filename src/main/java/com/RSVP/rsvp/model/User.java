@@ -179,6 +179,8 @@ public class User implements Serializable, UserDetails, SocialUserDetails {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    public void addRole(Role role) { this.roles.add(role); }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new LinkedHashSet<>();
