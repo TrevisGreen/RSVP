@@ -20,7 +20,7 @@ public class PartyDaoHibernate extends BaseDao implements PartyDao {
 
     @Override
     public Integer getAllotedSeats(Party party) {
-        Criteria criteria = currentSession().createCriteria(Party.class);
+        Criteria criteria = (Criteria) currentSession().createQuery(String.valueOf(Party.class));
 
         criteria.createCriteria("event").add(Restrictions.idEq(party.getEvent().getId()));
         criteria.setProjection(Projections.sum("seats"));
@@ -42,7 +42,7 @@ public class PartyDaoHibernate extends BaseDao implements PartyDao {
     @Override
     public List<Party> findAllByEvent(Event event) {
         Query query = currentSession().createQuery("select p from Party p inner join p.event e where e.id = :eventId");
-        query.setString("eventId", event.getId());
+        query.toString();
         return query.list();
     }
 }

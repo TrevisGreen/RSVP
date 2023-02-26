@@ -20,8 +20,8 @@ public class MessageDaoHibernate extends BaseDao implements MessageDao {
     @Override
     public Map<String, Object> list(Map<String, Object> params) {
         log.debug("Message list");
-        Criteria criteria = currentSession().createCriteria(Message.class);
-        Criteria countCriteria = currentSession().createCriteria(Message.class);
+        Criteria criteria = (Criteria) currentSession().createQuery(String.valueOf(Message.class));
+        Criteria countCriteria = (Criteria) currentSession().createQuery(String.valueOf(Message.class));
         if (params.containsKey("filter")) {
             String filter = (String) params.get("filter");
             Disjunction properties = Restrictions.disjunction();
@@ -72,7 +72,7 @@ public class MessageDaoHibernate extends BaseDao implements MessageDao {
     @Override
     public Message get(String name) {
         Query query = currentSession().getNamedQuery("findMessageByName");
-        query.setString("name", name);
+        query.toString();
         return (Message) query.uniqueResult();
     }
 

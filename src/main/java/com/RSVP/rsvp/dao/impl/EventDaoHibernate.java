@@ -4,6 +4,7 @@ package com.RSVP.rsvp.dao.impl;
 import com.RSVP.rsvp.dao.BaseDao;
 import com.RSVP.rsvp.dao.EventDao;
 import com.RSVP.rsvp.model.Event;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.*;
 import org.hibernate.query.Query;
@@ -21,8 +22,8 @@ public class EventDaoHibernate extends BaseDao implements EventDao {
     @Override
     public Map<String, Object> list(Map<String, Object> params) {
         log.debug("Event list");
-        Criteria criteria = currentSession().createCriteria(Event.class);
-        Criteria countCriteria = currentSession().createCriteria(Event.class);
+        Criteria criteria = (Criteria) currentSession().createQuery(String.valueOf(Event.class));
+        Criteria countCriteria = (Criteria) currentSession().createQuery(String.valueOf(Event.class));
         if (params.containsKey("filter")) {
             String filter = (String) params.get("filter");
             criteria.createAlias("user", "user_alias");
@@ -86,15 +87,15 @@ public class EventDaoHibernate extends BaseDao implements EventDao {
     @Transactional(readOnly = true)
     @Override
     public Event getByCode(String code) {
-        Query query = currentSession().getNamedQuery("findEventByCode");
-        query.setString("code", code);
-        return (Event) query.uniqueResult();
+    Query query = currentSession().getNamedQuery("findAllByCode");
+       query.toString();
+       return (Event) query.uniqueResult();
     }
 
     @Override
     public void delete(Event event) {
         Query query = currentSession().createQuery("delete from Party p where p.event.id = :eventId");
-        query.setString("eventId", event.getId());
+        query.toString();
         query.executeUpdate();
         currentSession().delete(event);
     }
